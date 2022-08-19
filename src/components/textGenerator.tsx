@@ -1,18 +1,28 @@
 import React, { useEffect } from 'react'
 import {useAppSelector,useAppDispatch} from '../redux/hooks'
-import {selectText,getText} from '../redux/typingSlice'
+import {selectTextGenerator,getText,selectMatchTextNum,selectIsTrueText} from '../redux/typingSlice'
+import { TextPlace } from './styled/TextPlace.styled';
 
 const TextGenerator: React.FC = () => {
-  const text = useAppSelector(selectText);
+  const textGenerator = useAppSelector(selectTextGenerator);
+  const matchTextNum = useAppSelector(selectMatchTextNum);
+  const isTrueText = useAppSelector(selectIsTrueText);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if(text===""){
+    if(textGenerator.length<1){
       dispatch(getText())
     }
-  }, [text])
-  
+  }, [textGenerator,dispatch])
+  console.log(textGenerator);
   return (
-    <div>{text}</div>
+    <TextPlace >
+        {
+          textGenerator.map((text,index)=>(<span key={index} >
+            <span className={index===matchTextNum?"onType":index>matchTextNum?"":isTrueText[index]?"trueType":"falseType"}>{text}</span>
+            <span>{" "}</span>
+            </span>))
+        }
+    </TextPlace>
   )
 }
 
