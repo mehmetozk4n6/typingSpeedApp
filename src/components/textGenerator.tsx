@@ -13,7 +13,6 @@ const TextGenerator: React.FC = () => {
       dispatch(getText())
     }
   }, [textGenerator,dispatch])
-  console.log(textGenerator);
   return (
     <TextPlace >
         {

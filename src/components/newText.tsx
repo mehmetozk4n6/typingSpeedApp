@@ -1,11 +1,17 @@
 import React from 'react'
 import { useAppDispatch } from '../redux/hooks'
-import { getText } from '../redux/typingSlice';
+import { getText,reset } from '../redux/typingSlice';
 
 const NewText = () => {
     const dispatch= useAppDispatch();
+    const handleClick = () => {
+      dispatch(reset());
+      dispatch(getText());
+    }
   return (
-    <button onClick={()=>dispatch(getText())}>New Text</button>
+    <button onClick={()=>handleClick()}>
+      <b>New</b>
+      </button>
   )
 }
 
