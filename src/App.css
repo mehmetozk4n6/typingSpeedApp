@@ -3,6 +3,7 @@
   background-color: #BDDEFE;
   min-height: 100vh;
   padding: 2rem;
+  font-size: 1.3em;
 }
 .onType{
   background-color:black ;
@@ -13,4 +14,14 @@
 }
 .falseType{
   color: red;
+}
+.badtyped{
+  background-color: red;
+  color: #fff;
+}
+input{
+  font-size: 1.3em;
+}
+button{
+  font-size: .8em;
 }

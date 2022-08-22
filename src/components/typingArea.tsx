@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {useAppSelector,useAppDispatch} from '../redux/hooks';
-import {incrementTextNum,addbool,selectTextGenerator,selectMatchTextNum,selectSituation, changeSituation} from '../redux/typingSlice';
+import {incrementTextNum,addbool,selectTextGenerator,selectMatchTextNum,selectSituation, changeSituation,  typeText} from '../redux/typingSlice';
 
 
 const TypingArea = () => {
@@ -10,13 +10,12 @@ const TypingArea = () => {
   const situation = useAppSelector(selectSituation);
   const [typer,setTyper] = useState("")
 
-
-
   const matchTyper = (input:string) => {
     if(situation==='idle'){
       dispatch(changeSituation('started'));
     }
     if(input[input.length-1]===" "){
+      dispatch(typeText(""));
       setTyper("");
       if(input.trim()===textGenerator[matchTextNum]){
         dispatch(addbool(true));
@@ -25,11 +24,12 @@ const TypingArea = () => {
       }
       dispatch(incrementTextNum());
     }else{
+      dispatch(typeText(input));
       setTyper(input);
     }
   }
   return (
-    <input value={situation==='started'?typer:""} disabled={situation==='finished'} onChange={e => {matchTyper(e.target.value)}} />
+    <input value={situation==='started'?typer:""} disabled={situation==='finished'} onChange={e => {matchTyper(e.target.value)}} autoFocus />
   )
 }
 
